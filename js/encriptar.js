@@ -1,21 +1,14 @@
-<<<<<<< HEAD
 var botonEncriptar = document.querySelector(".encriptar");
 var botonDesencriptar = document.querySelector(".desencriptar");
 var muñeco = document.querySelector(".doll-container");
-var titulo = document.querySelector(".title-container");
+var titulo = document.querySelector(".msg-container");
 var parrafo = document.querySelector(".paragraph-container");
 var textoResultado = document.querySelector(".text-result");
-var botonCopiar = document.querySelector(".copi");
-var result = document.getElementById('result')
+var btnCopiar = document.querySelector(".btn-copiar");
 
 botonEncriptar.onclick = encriptar;
 botonDesencriptar.onclick = desencriptar;
-
-botonCopiar.addEventListener('click', e =>{
-    result[0].select();
-    document.execCommand('copy');
-});
-
+btnCopiar.onclick = copiar;
 
 function encriptar(){
     var texto = recuperarArea();
@@ -33,6 +26,16 @@ function desencriptar(){
         mostrar()
         textoResultado.textContent = desencriptarTexto(texto);
     }
+}
+
+function copiar(){
+    var codigoACopiar = document.getElementById('text-copy');
+    var seleccion = document.createRange();
+    seleccion.selectNodeContents(codigoACopiar);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(seleccion);
+    var res = document.execCommand('copy');
+    window.getSelection().removeRange(seleccion);
 }
 
 function recuperarArea(){
@@ -113,46 +116,4 @@ function desencriptarTexto(mensaje){
         }
     }
     return textoFinal;
-=======
-var botonEncriptar = document.querySelector(".encriptar");
-var botonDesencriptar = document.querySelector(".desencriptar");
-var muñeco = document.querySelector(".doll-container");
-var titulo = document.querySelector(".title-container");
-var parrafo = document.querySelector(".paragraph-container");
-var textoResultado = document.querySelector(".text-result");
-
-botonEncriptar.onclick = encriptar;
-
-function encriptar(){
-    var texto = recuperarArea();
-    if(texto !== ""){
-        ocultar();
-        mostrar();
-        textoResultado.textContent = texto;
-    }
-}
-
-function recuperarArea(){
-    var area = document.querySelector(".area");
-    return area.value;
-}
-
-function ocultar(){
-    muñeco.classList.add("hide");
-    titulo.classList.add("hide");
-    parrafo.classList.add("hide");
-}
-
-function mostrar(){
-    var resultado = document.querySelector(".result-container");
-    var botonCopiar = document.querySelector(".copiar"); 
-    
-    resultado.classList.remove("hide");
-    botonCopiar.classList.remove("hide");
-}
-
-
-function encriptarTexto(mensaje){
-    var
->>>>>>> 0dad07607432eaa8ef6c457d06cfe563cbde3ac9
 }
